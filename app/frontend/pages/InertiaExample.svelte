@@ -2,14 +2,20 @@
   import svelteSvg from '/assets/svelte.svg'
   import inertiaSvg from '/assets/inertia.svg'
   import viteRubySvg from '/assets/vite_ruby.svg'
+  import Navbar from '../components/navbar.svelte';
+  import { User } from '../utils/User.svelte';
+  import { page } from '@inertiajs/svelte'
 
-  export let name
+  // export let name
+
+  let user = new User($page.props.name);
 
   let count = 0
 
   function handleClick() {
     count += 1
   }
+
 </script>
 
 <svelte:head>
@@ -17,8 +23,10 @@
 </svelte:head>
 
 <div class="inertia_example">
-  <h1>Hello {name}!</h1>
+  <Navbar />
+  <h1 class="text-5xl font-bold">Hello {user.name}!</h1>
 
+  <button onclick={() => user.changeName('World')}>Change Name</button>
   <div>
     <a href="https://inertia-rails.netlify.app" target="_blank">
       <img class="logo" src={inertiaSvg} alt="Inertia logo" />
@@ -34,7 +42,7 @@
   <h2>Inertia + Vite Ruby + Svelte</h2>
 
   <div class="card">
-    <button on:click={handleClick}>
+    <button onclick={handleClick}>
       count is {count}
     </button>
     <p>
@@ -60,10 +68,10 @@
     text-align: center;
   }
 
-  h1 {
+  /* h1 {
     font-size: 3.2em;
     line-height: 1.1;
-  }
+  } */
 
   h2 {
     font-size: 2.6em;
