@@ -1,0 +1,18 @@
+# Add configuration values here, as shown below.
+#
+# pusher_app_id: ""
+# pusher_key:
+# pusher_secret:
+# stripe_api_key:
+# stripe_publishable_key:
+#
+# production:
+#   stripe_api_key:
+#   stripe_publishable_key:
+
+AWS_COGNITO_POOL_ID: us-east-1_IykRxQehU
+
+AWS_COGNITO_APP_CLIENT_ID:
+AWS_COGNITO_REGION: us-east-1
+AWS_ACCESS_KEY:
+AWS_SECRET_KEY:
