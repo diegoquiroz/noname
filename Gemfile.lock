@@ -77,7 +77,11 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
+    after_commit_everywhere (1.4.0)
+      activerecord (>= 4.2)
+      activesupport
     base64 (0.2.0)
+    bcrypt (3.1.20)
     bigdecimal (3.1.8)
     bindex (0.8.1)
     bootsnap (1.18.4)
@@ -208,6 +212,21 @@ GEM
       io-console (~> 0.5)
     rexml (3.3.6)
       strscan
+    roda (3.84.0)
+      rack
+    rodauth (2.36.0)
+      roda (>= 2.6.0)
+      sequel (>= 4)
+    rodauth-model (0.2.1)
+      rodauth (~> 2.0)
+    rodauth-rails (1.15.0)
+      bcrypt
+      railties (>= 5.0, < 8)
+      roda (~> 3.76)
+      rodauth (~> 2.36)
+      rodauth-model (~> 0.2)
+      sequel-activerecord_connection (~> 1.1)
+      tilt
     rubyzip (2.3.2)
     selenium-webdriver (4.24.0)
       base64 (~> 0.2)
@@ -215,6 +234,12 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sequel (5.84.0)
+      bigdecimal
+    sequel-activerecord_connection (1.4.1)
+      activerecord (>= 5.0, < 8)
+      after_commit_everywhere (~> 1.1)
+      sequel (~> 5.38)
     sqlite3 (2.0.4-aarch64-linux-gnu)
     sqlite3 (2.0.4-aarch64-linux-musl)
     sqlite3 (2.0.4-arm-linux-gnu)
@@ -228,6 +253,7 @@ GEM
     stringio (3.1.1)
     strscan (3.1.0)
     thor (1.3.2)
+    tilt (2.4.0)
     timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -276,6 +302,7 @@ DEPENDENCIES
   jbuilder
   puma (>= 5.0)
   rails (~> 7.1.4)
+  rodauth-rails (~> 1.15)
   selenium-webdriver
   sqlite3 (>= 1.4)
   tzinfo-data
