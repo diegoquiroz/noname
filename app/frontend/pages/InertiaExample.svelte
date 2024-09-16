@@ -3,12 +3,15 @@
   import inertiaSvg from '/assets/inertia.svg'
   import viteRubySvg from '/assets/vite_ruby.svg'
   import Navbar from '../components/navbar.svelte';
+  import Modal from '../components/modal.svelte';
   import { User } from '../utils/User.svelte';
-  import { page } from '@inertiajs/svelte'
+  import { page } from '@inertiajs/svelte';
+  import { Alert } from 'flowbite-svelte';
 
   // export let name
 
   let user = new User($page.props.name);
+  let auth = $page.props.auth;
 
   let count = 0
 
@@ -24,7 +27,11 @@
 
 <div class="inertia_example">
   <Navbar />
-  <h1 class="text-5xl font-bold">Hello {user.name}!</h1>
+  <Alert>
+    <span class="font-medium">Info alert!</span>
+    Change a few things up and try submitting again.
+  </Alert>
+  <h1 class="text-5xl font-bold">Hello {auth.email}!</h1>
 
   <button onclick={() => user.changeName('World')}>Change Name</button>
   <div>
@@ -41,6 +48,8 @@
 
   <h2>Inertia + Vite Ruby + Svelte</h2>
 
+  <Modal />
+
   <div class="card">
     <button onclick={handleClick}>
       count is {count}
@@ -53,6 +62,30 @@
   <p class="read-the-docs">
     Click on the Inertia, Vite Ruby, and Svelte logos to learn more
   </p>
+
+  <table class="min-w-full bg-white border border-gray-300 mt-4">
+    <thead>
+      <tr>
+        <th class="py-2 px-4 border-b">ID</th>
+        <th class="py-2 px-4 border-b">First Name</th>
+        <th class="py-2 px-4 border-b">Last Name</th>
+        <th class="py-2 px-4 border-b">Email</th>
+        <th class="py-2 px-4 border-b">Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each $page.props.users as user}
+        <tr>
+          <td class="py-2 px-4 border-b">{user.id}</td>
+          <td class="py-2 px-4 border-b">{user.first_name}</td>
+          <td class="py-2 px-4 border-b">{user.last_name}</td>
+          <td class="py-2 px-4 border-b">{user.email}</td>
+          <td class="py-2 px-4 border-b">{user.admin ? 'Yes' : 'No'}</td>
+        </tr>
+      {/each}
+    </tbody>
+  </table>
+
 </div>
 
 <style>

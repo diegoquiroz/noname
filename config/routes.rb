@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'inertia-example', to: 'inertia_example#index'
+  root to: 'inertia_example#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -8,4 +8,15 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  # devise routes
+  devise_for :users, skip: [ :sessions, :passwords, :registrations ]
+  as :user do
+    get 'login', to: 'users/sessions#new', as: :new_user_session
+    post 'login', to: 'users/sessions#create', as: :user_session
+    match 'logout', to: 'users/sessions#destroy', as: :destroy_user_session, via: Devise.mappings[:user].sign_out_via
+
+    get 'signup', to: 'users/registrations#new', as: :new_user_registration
+    post 'signup', to: 'users/registrations#create', as: :user_registration
+  end
 end

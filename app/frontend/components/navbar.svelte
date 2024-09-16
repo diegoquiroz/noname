@@ -1,5 +1,8 @@
 <script>
-  import { inertia, Link } from '@inertiajs/svelte';
+  import { inertia, page } from '@inertiajs/svelte';
+  const { auth } = $page.props;
+
+  let isAuthenticated = Boolean(auth);
 </script>
 
 <nav class="navbar">
@@ -15,8 +18,14 @@
     </div>
 
     <div class="navbar-end">
-      <a href="/login" use:inertia class="navbar-item">Login</a>
-      <a href="/signup" use:inertia class="navbar-item">Sign Up</a>
+      {#if isAuthenticated}
+        <span class="navbar-item">Welcome, {auth.email}</span>
+        <a href="/logout" use:inertia class="navbar-item">Logout</a>
+        <button use:inertia="{{ href: '/logout', method: 'DELETE' }}">Logout</button>
+      {:else}
+        <a href="/login" use:inertia class="navbar-item">Login</a>
+        <a href="/create-account" use:inertia class="navbar-item">Sign Up</a>
+      {/if}
     </div>
   </div>
 </nav>
